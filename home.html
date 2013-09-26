@@ -1,0 +1,16 @@
+<section class="content-wrapper main-content clear-fix" ng-init="init()">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Height</th>
+            <th>Country</th>
+        </tr>
+        <tr ng-repeat="mountain in mountains">
+            <td>{{ mountain.name}}</td>
+            <td>{{ mountain.height }}</td>
+            <td>{{ mountain.country }}</td>
+        </tr>
+    </table>
+
+    <div>Add mountain</div>
+</section>

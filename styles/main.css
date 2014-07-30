@@ -36,10 +36,22 @@ header .bar {
     font-weight: bold;
 }
 
-#body {
+.errors {
+    color: red;
+}
+
+.error {
+
+}
+
+#body, footer {
     margin: 0 auto;
     padding: 0 12px;
     max-width: 960px;
+}
+
+footer {
+    text-align: right;
 }
 
 a {

@@ -5,12 +5,21 @@
             <th>Height</th>
             <th>Country</th>
         </tr>
-        <tr ng-repeat="mountain in mountains">
-            <td>{{ mountain.name}}</td>
+        <tr ng-repeat="mountain in mountains | orderBy: 'name'">
+            <td>{{ mountain.name }}</td>
             <td>{{ mountain.height }}</td>
             <td>{{ mountain.country }}</td>
+            <td><button ng-click="delete(mountain.id)">Delete</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" ng-model="name"  size="30" placeholder="name of the mountain"></td>
+            <td><input type="text" ng-model="height"  size="15" placeholder="height of the mountain"></td>
+            <td><input type="text" ng-model="country"  size="30" placeholder="country where the mountain is"></td>
+            <td><button ng-click="add()">Add</button></td>
         </tr>
     </table>
 
-    <div>Add mountain</div>
+    <ul class="errors">
+        <li class="error" ng-repeat="error in errors">{{ error.text }}</li>
+    </ul>
 </section>

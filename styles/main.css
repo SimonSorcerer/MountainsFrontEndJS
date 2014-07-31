@@ -74,4 +74,28 @@ a:hover {
 table {
     margin: 26px 12px;
     width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    line-height: 2.4em;
+    padding: 0 6px;
+}
+
+th {
+    text-align: left;
+    border-bottom: 1px solid #c7d1d6;
+}
+
+tr.add td {
+}
+
+input {
+    padding: 2px;
+    transition:0.5s linear all;
+    background: white;
+}
+
+input.ng-invalid.ng-dirty {
+    border: 1px solid red;
 }

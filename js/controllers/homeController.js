@@ -42,7 +42,7 @@ function HomeController($scope, $filter) {
         refreshData();
     };
 
-    $scope.delete = function(id) {
+    $scope.remove = function(id) {
         mountainsTable.del({ id: id }).then(refreshData, handleError);
 
         console.log("Mountain (id: " + id + ") was removed");

@@ -13,7 +13,7 @@
                 <td>{{ mountain.height }} m</td>
                 <td>{{ mountain.country }}</td>
                 <td>{{ mountain.date | date:'longDate' }}</td>
-                <td><button ng-click="delete(mountain.id)">Delete</button></td>
+                <td><button ng-click="remove(mountain.id)">Delete</button></td>
             </tr>
             <tr class="loading" ng-show="loading">
                 <td colspan="5">Loading data, please wait ...</td>

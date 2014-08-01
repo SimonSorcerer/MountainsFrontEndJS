@@ -15,6 +15,9 @@
                 <td>{{ mountain.date | date:'longDate' }}</td>
                 <td><button ng-click="delete(mountain.id)">Delete</button></td>
             </tr>
+            <tr class="loading" ng-show="loading">
+                <td colspan="5">Loading data, please wait ...</td>
+            </tr>
             <tr class="add">
                 <td><input type="text" name="mName" ng-model="newMountain.name" size="30" placeholder="name of the mountain" required></td>
                 <td><input type="text" name="mHeight" ng-model="newMountain.height" ng-pattern="/^[1-9][0-9]*$/" size="10" placeholder="height" required></td>
@@ -29,6 +32,7 @@
             <li ng-show="mForm.mHeight.$dirty && mForm.mHeight.$error.required">Please enter height of the mountain</li>
             <li ng-show="mForm.mHeight.$dirty && mForm.mHeight.$error.pattern">Height of the mountain should be a number greater than zero</li>
             <li ng-show="mForm.mCountry.$dirty && mForm.mCountry.$error.required">Please enter country for new mountain</li>
+            <li ng-show="mForm.mDate.$dirty && mForm.mDate.$error.required">Please enter date for new mountain</li>
         </ul>
     </form>
 </section>

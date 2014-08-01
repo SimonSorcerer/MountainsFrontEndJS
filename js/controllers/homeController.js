@@ -1,4 +1,4 @@
-function HomeController($scope) {
+function HomeController($scope, $filter) {
     $scope.mountains = [];
 
     var mountainsTable;
@@ -15,9 +15,12 @@ function HomeController($scope) {
         return client.getTable(tableName);
     }
 
-    function refresh() {
+    function refreshData() {
+        $scope.loading = true;
+
         mountainsTable.where("").read().then(function (mountains) {
             $scope.mountains = mountains;
+            $scope.loading = false;
             $scope.$apply();
         });
     }
@@ -26,14 +29,21 @@ function HomeController($scope) {
         console.error(err);
     }
 
+    function setDefaultDate() {
+        $scope.newMountain = {
+            date: $filter("date")(Date.now(), 'yyyy-MM-dd')
+        }
+    }
+
     $scope.init = function() {
         mountainsTable = getSourceTable();
 
-        refresh();
+        setDefaultDate();
+        refreshData();
     };
 
     $scope.delete = function(id) {
-        mountainsTable.del({ id: id }).then(refresh, handleError);
+        mountainsTable.del({ id: id }).then(refreshData, handleError);
 
         console.log("Mountain (id: " + id + ") was removed");
     };
@@ -61,7 +71,7 @@ function HomeController($scope) {
 
             mountainsTable.insert(newMountain).then(function (item) {
                 console.log("Mountain added: " + item);
-                refresh();
+                refreshData();
             });
         }
    }

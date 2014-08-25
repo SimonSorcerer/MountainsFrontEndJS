@@ -1,0 +1,9 @@
+<div ng-show="isAuthenticated">
+    You are logged in as <span>{{ user.userId }}</span>.
+    <button id="log-out">Log out</button>
+</div>
+
+<div ng-hide="isAuthenticated">
+    You are not logged in.
+    <button ng-click="login()">Log in</button>
+</div>

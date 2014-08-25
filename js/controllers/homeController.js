@@ -1,18 +1,18 @@
-function HomeController($scope, $filter) {
+function HomeController($scope, $rootScope, $filter, AuthManager, MobileClient) {
     $scope.mountains = [];
 
     var mountainsTable;
 
     function getSourceTable() {
-        var client,
-            tableName = "mountains";
+        var tableName = 'mountains';
 
-        client = new WindowsAzure.MobileServiceClient(
-            "https://mountains.azure-mobile.net/",
-            "mYGWhYQkkZtdvHrtxlCdwsmjqDwrTJ22"
-        );
+        return MobileClient.getTable(tableName);
+    }
 
-        return client.getTable(tableName);
+    function login() {
+        AuthManager.login($rootScope.token).then(function () {
+            refreshData();
+        });
     }
 
     function refreshData() {
@@ -36,10 +36,10 @@ function HomeController($scope, $filter) {
     }
 
     $scope.init = function() {
+        login();
         mountainsTable = getSourceTable();
 
         setDefaultDate();
-        refreshData();
     };
 
     $scope.remove = function(id) {
@@ -51,11 +51,6 @@ function HomeController($scope, $filter) {
     function isNumber(n) {
         return !isNaN(parseFloat(n)) && isFinite(n);
     }
-
-    function isGreaterThanZero(n) {
-        return isNumber(n) && n > 0;
-    }
-
 
     function clearInput() {
         $scope.name = "";

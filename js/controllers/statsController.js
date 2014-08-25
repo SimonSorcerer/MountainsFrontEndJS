@@ -1,18 +1,12 @@
-function StatsController($scope) {
+function StatsController($scope, MobileClient) {
     var mountainsTable;
 
     $scope.stats = [];
 
     function getSourceTable() {
-        var client,
-            tableName = "mountains";
+        var tableName = "mountains";
 
-        client = new WindowsAzure.MobileServiceClient(
-            "https://mountains.azure-mobile.net/",
-            "mYGWhYQkkZtdvHrtxlCdwsmjqDwrTJ22"
-        );
-
-        return client.getTable(tableName);
+        return MobileClient.getTable(tableName);
     }
 
     function getTotalHeight(callback) {

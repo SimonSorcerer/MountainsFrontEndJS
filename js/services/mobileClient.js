@@ -1,4 +1,11 @@
 app.service('MobileClient', function () {
+    var tableName = 'mountains';
+
+    function getSourceTable() {
+        return MobileClient.getTable(tableName);
+    }
+
+
     function getAzureClient() {
         return new WindowsAzure.MobileServiceClient(
             "https://mountains.azure-mobile.net/",
@@ -7,4 +14,11 @@ app.service('MobileClient', function () {
     }
 
     return getAzureClient();
+
+    return {
+        client: getAzureClient(),
+        tables: {
+            mountains: getSourceTable('mountains')
+        }
+    }
 });

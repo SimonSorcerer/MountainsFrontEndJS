@@ -1,13 +1,5 @@
-function HomeController($scope, $rootScope, $filter, AuthManager, MobileClient) {
+function HomeController($scope, $rootScope, $filter, AuthManager, MountainRepository) {
     $scope.mountains = [];
-
-    var mountainsTable;
-
-    function getSourceTable() {
-        var tableName = 'mountains';
-
-        return MobileClient.getTable(tableName);
-    }
 
     function login() {
         AuthManager.login($rootScope.token).then(function () {
@@ -18,8 +10,8 @@ function HomeController($scope, $rootScope, $filter, AuthManager, MobileClient) 
     function refreshData() {
         $scope.loading = true;
 
-        mountainsTable.where("").read().then(function (mountains) {
-            $scope.mountains = mountains;
+        MountainRepository.all(function (results) {
+            $scope.mountains = results;
             $scope.loading = false;
             $scope.$apply();
         });
@@ -37,20 +29,13 @@ function HomeController($scope, $rootScope, $filter, AuthManager, MobileClient) 
 
     $scope.init = function() {
         login();
-        mountainsTable = getSourceTable();
-
         setDefaultDate();
     };
 
     $scope.remove = function(id) {
-        mountainsTable.del({ id: id }).then(refreshData, handleError);
-
+        MountainRepository.remove({ id: id }, refreshData, handleError)
         console.log("Mountain (id: " + id + ") was removed");
     };
-
-    function isNumber(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
 
     function clearInput() {
         $scope.name = "";
@@ -64,8 +49,8 @@ function HomeController($scope, $rootScope, $filter, AuthManager, MobileClient) 
         if (form.$valid) {
             clearInput();
 
-            mountainsTable.insert(newMountain).then(function (item) {
-                console.log("Mountain added: " + item);
+            MountainRepository.insert(newMountain, function (result) {
+                console.log("Mountain added: " + result);
                 refreshData();
             });
         }

@@ -1,22 +1,26 @@
 app.service('MobileClient', function () {
-    var tableName = 'mountains';
+    var client = initializeAzureClient(),
+        tableName = 'mountains';
 
     function getSourceTable() {
-        return MobileClient.getTable(tableName);
+        return client.getTable(tableName);
     }
 
 
-    function getAzureClient() {
+    function initializeAzureClient() {
         return new WindowsAzure.MobileServiceClient(
             "https://mountains.azure-mobile.net/",
             "mYGWhYQkkZtdvHrtxlCdwsmjqDwrTJ22"
         );
     }
 
-    return getAzureClient();
+    function login(service, token) {
+        return client.login(service, token);
+    }
 
     return {
-        client: getAzureClient(),
+        login: login,
+        currentUser: client.currentUser,
         tables: {
             mountains: getSourceTable('mountains')
         }

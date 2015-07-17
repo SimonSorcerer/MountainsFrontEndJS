@@ -1,4 +1,5 @@
 /// <reference path="../../typings/react/react.d.ts"/>
+
 var root = document.body,
     R = React,
     DOM = R.DOM,
@@ -37,6 +38,14 @@ function classConcat() {
     return args.join(' ');
 }
 
+components.addItem = R.createClass({
+    render: function () {
+        var addNewElement = DOM.div({ className: classConcat('circle', 'add') }, '+');
+        
+        return DOM.div({ className: 'record' }, addNewElement);
+    }
+});
+
 components.timelineItem = R.createClass({
     render: function () {
         var text = this.props.name + ' (' + this.props.height + 'm)',
@@ -53,18 +62,20 @@ components.timeline = R.createClass({
     render: function () {
         var records = [],
             recordsElement,
-            timelineAnchorElement = DOM.div({ className: 'anchor' });
+            timelineAnchorElement = DOM.div({ className: 'anchor' }),
+            addItemElement = R.createElement(components.addItem),
+            children = [addItemElement, timelineAnchorElement];
         
         this.props.data.forEach(function (item) {
             records.push(R.createElement(components.timelineItem, item));
         });
         
         if (records) {
-            recordsElement = DOM.div({ className: 'records' }, records)
-            return DOM.div({ className: 'timeline' }, [timelineAnchorElement, recordsElement]);
+            recordsElement = DOM.div({ className: 'records' }, records);
+            children.push(recordsElement);
         }
         
-        return DOM.div({ className: 'timeline' }, timelineAnchorElement);
+        return DOM.div({ className: 'timeline' }, children);
     }
 });
 

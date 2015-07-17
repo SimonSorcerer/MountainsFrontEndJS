@@ -40,9 +40,18 @@
 	position: absolute;
 	display: inline-block;
 	left: 120px;
-	top: calc(50% - 8px);
+	top: calc(50% - 12px);
 	line-height: 24px;
-	font: 11pt normal Arial, Helvetica, sans-serif;
+	font: 11pt/24px normal Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.add {
+	width: 40px;
+	height: 40px;
+	left: 40px;
+	text-align: center;
+	font: 11pt/40px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
 

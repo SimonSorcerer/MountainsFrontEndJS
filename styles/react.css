@@ -1,3 +1,77 @@
+.timeline {
+	color: #333;
+}
+
+.timeline .anchor {
+	position: absolute;
+	top: 40px;
+	bottom: 10%;
+	left: 70px;
+	width: 2px;
+	background-color: #444;
+	z-index: -6;
+}
+
+.timeline .record {
+	position: relative;
+	width: 400px;
+	padding: 16px 0;
+}
+
+.timeline .record .anchor {
+	top: calc(50% - 1px);
+	left: 60px;
+	width: 54px;
+	height: 0px;
+	border-bottom: 1px dotted #888;
+	background: none;
+}
+
+.timeline .circle {
+	position: relative;
+	display: inline-block;
+	border-radius: 50%;
+	border: 2px solid #222;
+	background: repeating-linear-gradient(45deg, #DEDEDE, #DEDEDE 6px, #FFF 6px, #FFF 10px);
+	z-index: 2;
+}
+
+.timeline .label {
+	position: absolute;
+	display: inline-block;
+	left: 120px;
+	top: calc(50% - 8px);
+	line-height: 24px;
+	font: 11pt normal Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+
+.epic {
+	width: 80px;
+	height: 80px;
+	left: 20px;	
+}
+
+.big {
+	width: 60px;
+	height: 60px;
+	left: 30px;	
+}
+
 .medium {
-	color: red;
+	width: 40px;
+	height: 40px;
+	left: 40px;	
+}
+
+.small {
+	width: 20px;
+	height: 20px;
+	left: 50px;	
+}
+
+.tiny {
+	width: 10px;
+	height: 10px;
+	left: 55px;	
 }

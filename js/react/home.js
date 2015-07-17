@@ -3,11 +3,11 @@ var root = document.body,
     R = React,
     DOM = R.DOM,
     timelineData = [
-        { name: 'Gerlach', height: 2655 },
-        { name: 'Mala Dumola', height: 470 },
-        { name: 'Chopok', height: 2022 },
-        { name: 'Mt. Blanc', height: 5417 },
-        { name: 'Keprnik', height: 1344 }
+        { name: 'Rumburak', height: 2655 },
+        { name: 'Peprak', height: 470 },
+        { name: 'Rumcajs', height: 2022 },
+        { name: 'Amalka', height: 5417 },
+        { name: 'Chocholousek', height: 1344 }
     ],
     components = {},
     categories = {
@@ -31,24 +31,40 @@ function getMountainCategory(size) {
     return categories.tiny; 
 }
 
+function classConcat() {
+    var args = Array.prototype.slice.call(arguments);
+    
+    return args.join(' ');
+}
+
 components.timelineItem = R.createClass({
     render: function () {
         var text = this.props.name + ' (' + this.props.height + 'm)',
-            className = getMountainCategory(this.props.height);
-
-        return DOM.div({ className: className }, text);
+            mountainCategory = getMountainCategory(this.props.height),
+            recordAnchorElement = DOM.div({ className: 'anchor' }),
+            labelElement = DOM.div({ className: 'label' }, text),
+            mountainCircleElement = DOM.div({ className: classConcat('circle', mountainCategory) });
+            
+        return DOM.div({ className: classConcat('record', 'mountain') }, [recordAnchorElement, mountainCircleElement, labelElement]);
     }
 });
 
 components.timeline = R.createClass({
     render: function () {
-        var children = [];
+        var records = [],
+            recordsElement,
+            timelineAnchorElement = DOM.div({ className: 'anchor' });
         
         this.props.data.forEach(function (item) {
-            children.push(R.createElement(components.timelineItem, item));
+            records.push(R.createElement(components.timelineItem, item));
         });
         
-        return DOM.div({ className: 'timeline' }, children);
+        if (records) {
+            recordsElement = DOM.div({ className: 'records' }, records)
+            return DOM.div({ className: 'timeline' }, [timelineAnchorElement, recordsElement]);
+        }
+        
+        return DOM.div({ className: 'timeline' }, timelineAnchorElement);
     }
 });
 

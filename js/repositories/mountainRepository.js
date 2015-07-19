@@ -12,7 +12,6 @@ app.service('MountainRepository', function (MobileClient) {
     function getAll(callback) {
         table.where("").read().then(function (mountains) {
             callback(mountains);
-
         });
     }
 

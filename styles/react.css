@@ -1,12 +1,15 @@
 .timeline {
+	position: relative;
 	color: #333;
+	margin-left: 40px;
+	padding-left: 80px;
 }
 
 .timeline .anchor {
 	position: absolute;
 	top: 40px;
-	bottom: 10%;
-	left: 70px;
+	bottom: 10px;
+	left: 142px;
 	width: 2px;
 	background-color: #444;
 	z-index: -6;
@@ -19,9 +22,9 @@
 }
 
 .timeline .record .anchor {
-	top: calc(50% - 1px);
+	top: calc(50% - 2px);
 	left: 60px;
-	width: 54px;
+	width: 68px;
 	height: 0px;
 	border-bottom: 1px dotted #888;
 	background: none;
@@ -36,11 +39,15 @@
 	z-index: 2;
 }
 
+.timeline .circle:hover {
+	background: repeating-linear-gradient(-45deg, #71C6FF, #71C6FF 6px, #FFF 6px, #FFF 10px);
+}
+
 .timeline .label {
 	position: absolute;
 	display: inline-block;
-	left: 120px;
-	top: calc(50% - 12px);
+	left: 136px;
+	top: calc(50% - 13px);
 	line-height: 24px;
 	font: 11pt/24px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;
@@ -51,36 +58,11 @@
 	height: 40px;
 	left: 40px;
 	text-align: center;
-	font: 11pt/40px normal Arial, Helvetica, sans-serif;
+	font: 19pt/40px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;
+	cursor: pointer;
 }
 
-.epic {
-	width: 80px;
-	height: 80px;
-	left: 20px;	
-}
-
-.big {
-	width: 60px;
-	height: 60px;
-	left: 30px;	
-}
-
-.medium {
-	width: 40px;
-	height: 40px;
-	left: 40px;	
-}
-
-.small {
-	width: 20px;
-	height: 20px;
-	left: 50px;	
-}
-
-.tiny {
-	width: 10px;
-	height: 10px;
-	left: 55px;	
+.circle.add:hover {
+	background: repeating-linear-gradient(-45deg, #BFCBA6, #BFCBA6 6px, #FFF 6px, #FFF 10px);
 }

@@ -1,4 +1,4 @@
-app.service('MobileClient', function () {
+define(['MobileServiceClient'], function (MobileServiceClient) {
     var client = initializeAzureClient(),
         tableName = 'mountains';
 
@@ -8,7 +8,7 @@ app.service('MobileClient', function () {
 
 
     function initializeAzureClient() {
-        return new WindowsAzure.MobileServiceClient(
+        return new MobileServiceClient(
             "https://mountains.azure-mobile.net/",
             "mYGWhYQkkZtdvHrtxlCdwsmjqDwrTJ22"
         );

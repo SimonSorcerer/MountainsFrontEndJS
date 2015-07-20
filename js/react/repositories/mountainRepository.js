@@ -1,11 +1,9 @@
-app.service('MountainRepository', function (MobileClient) {
-    var table = MobileClient.tables.mountains;
+define(['services/azureClient'], function (azureClient) {
+    var table = azureClient.tables.mountains;
 
-    function find(filter) {
+    function find(filter, callback) {
         table.where(filter).read().then(function (mountains) {
-            $scope.mountains = mountains;
-            $scope.loading = false;
-            $scope.$apply();
+            callback(mountains);
         });
     }
 

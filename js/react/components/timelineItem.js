@@ -19,16 +19,28 @@ define(['react', 'helpers/css'], function (R, cssHelper) {
         render: function () {
             var text = this.props.name + ' (' + this.props.height + 'm)',
                 recordAnchorElement = R.DOM.div({ className: 'anchor', key: 'anchor' }),
+                dateElement = R.DOM.div({ className: 'date', key: 'date' }, this.props.date || '12.7.2015'),
                 labelElement = R.DOM.div({ className: 'label', key: 'label' }, text),
                 circleSize = getMountainDomSize(this.props.height),
                 mountainCircleStyles = {
                     width: circleSize, 
                     height: circleSize,
-                    left: 60 - Math.floor(circleSize/2)
+                    left: 141 - Math.floor(circleSize/2)
                 },
-                mountainCircleElement = R.DOM.div({ className: cssHelper.classConcat('circle'), style: mountainCircleStyles, key: 'circle' });
+                mountainCircleElement = R.DOM.div({ className: 'circle', style: mountainCircleStyles, key: 'circle' });
                 
-            return R.DOM.div({ className: cssHelper.classConcat('record', 'mountain'), key: 'record'}, [recordAnchorElement, mountainCircleElement, labelElement]);
+                function onMouseOver(event) {
+                    console.log(event);
+                }
+                
+            return R.DOM.div(
+                {   
+                    className: cssHelper.classConcat('record', 'mountain'), 
+                    key: 'record', 
+                    onMouseOver: onMouseOver 
+                },
+                [ recordAnchorElement, dateElement, mountainCircleElement, labelElement ]
+            );
         }
     });
 });

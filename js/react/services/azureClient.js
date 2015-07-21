@@ -14,8 +14,8 @@ define(['MobileServiceClient'], function (MobileServiceClient) {
         );
     }
 
-    function login(service, token) {
-        return client.login(service, token);
+    function login(service) {
+        return client.login(service);
     }
 
     return {

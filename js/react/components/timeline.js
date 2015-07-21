@@ -10,6 +10,7 @@ define(['react', 'components/addItem', 'components/timelineItem'], function (R, 
                 children = [addItemElement, timelineAnchorElement];
             
             this.props.data.forEach(function (item) {
+                item.key = item.id;
                 records.push(R.createElement(timelineItemComponent, item));
             });
             

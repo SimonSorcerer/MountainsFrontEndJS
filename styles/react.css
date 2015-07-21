@@ -2,10 +2,9 @@
 	position: relative;
 	color: #333;
 	margin-left: 40px;
-	padding-left: 80px;
 }
 
-.timeline .anchor {
+.anchor {
 	position: absolute;
 	top: 40px;
 	bottom: 10px;
@@ -15,22 +14,22 @@
 	z-index: -6;
 }
 
-.timeline .record {
+.record {
 	position: relative;
 	width: 400px;
 	padding: 16px 0;
 }
 
-.timeline .record .anchor {
+.record .anchor {
 	top: calc(50% - 2px);
-	left: 60px;
+	left: 202px;
 	width: 68px;
 	height: 0px;
 	border-bottom: 1px dotted #888;
 	background: none;
 }
 
-.timeline .circle {
+.circle {
 	position: relative;
 	display: inline-block;
 	border-radius: 50%;
@@ -39,24 +38,35 @@
 	z-index: 2;
 }
 
-.timeline .circle:hover {
+.circle:hover {
 	background: repeating-linear-gradient(-45deg, #71C6FF, #71C6FF 6px, #FFF 6px, #FFF 10px);
 }
 
-.timeline .label {
+.label {
 	position: absolute;
 	display: inline-block;
-	left: 136px;
+	left: 292px;
 	top: calc(50% - 13px);
 	line-height: 24px;
 	font: 11pt/24px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;
 }
 
+.date {
+	position: absolute;
+	display: none;
+	left: 10px;
+	top: calc(50% - 13px);
+	line-height: 24px;
+	font: 11pt/24px normal Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #888;
+}
+
 .add {
 	width: 40px;
 	height: 40px;
-	left: 40px;
+	left: 121px;
 	text-align: center;
 	font: 19pt/40px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;

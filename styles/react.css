@@ -1,7 +1,7 @@
 .timeline {
 	position: relative;
 	color: #333;
-	margin-left: 40px;
+	margin-left: 120px;
 }
 
 .anchor {
@@ -16,14 +16,14 @@
 
 .record {
 	position: relative;
-	width: 400px;
-	padding: 16px 0;
+	max-width: 600px;
+	padding: 24px 0;
 }
 
 .record .anchor {
 	top: calc(50% - 2px);
-	left: 202px;
-	width: 68px;
+	left: 148px;
+	width: 100px;
 	height: 0px;
 	border-bottom: 1px dotted #888;
 	background: none;
@@ -38,14 +38,14 @@
 	z-index: 2;
 }
 
-.circle:hover {
+.circleHovered {
 	background: repeating-linear-gradient(-45deg, #71C6FF, #71C6FF 6px, #FFF 6px, #FFF 10px);
 }
 
 .label {
 	position: absolute;
 	display: inline-block;
-	left: 292px;
+	left: 260px;
 	top: calc(50% - 13px);
 	line-height: 24px;
 	font: 11pt/24px normal Arial, Helvetica, sans-serif;
@@ -54,11 +54,12 @@
 
 .date {
 	position: absolute;
-	display: none;
+	opacity: 0;
+	transition: opacity 0.5s;
 	left: 10px;
 	top: calc(50% - 13px);
 	line-height: 24px;
-	font: 11pt/24px normal Arial, Helvetica, sans-serif;
+	font: 8pt/24px normal Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	color: #888;
 }
@@ -75,4 +76,39 @@
 
 .circle.add:hover {
 	background: repeating-linear-gradient(-45deg, #BFCBA6, #BFCBA6 6px, #FFF 6px, #FFF 10px);
+}
+
+.newItemContainer {
+	position: relative;
+	left: 120px;
+	margin-top: 16px;
+	width: 260px;
+	text-align: right;
+	background: repeating-linear-gradient(-45deg, #F4F4F4, #F4F4F4 6px, #FFF 6px, #FFF 10px);
+	border: 2px solid #222;
+	padding: 6px 8px;
+}
+
+.newItemContainer input, .newItemContainer select {
+	border: 1px solid #444;
+	background: #FFF;
+	margin: 4px 8px;
+	padding: 4px;
+	width: 160px;
+}
+
+.buttonHolder {
+	position: relative;
+	clear: both;
+	text-align: left;
+}
+
+.buttonHolder .cancel {
+	position: relative;
+	left: 0;
+}
+
+.buttonHolder .confirm {
+	position: relative;
+	right: 0;
 }

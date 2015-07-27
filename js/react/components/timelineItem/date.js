@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/react/react.d.ts"/>
-
 define(['react'], function (R) {
     return R.createClass({
         render: function () {

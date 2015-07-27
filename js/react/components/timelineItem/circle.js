@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/react/react.d.ts"/>
-
 function getMountainDomSize(size) {
     // function to map mountain size to circle size on the page
     // should be unit tested for specifications

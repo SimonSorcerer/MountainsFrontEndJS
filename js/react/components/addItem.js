@@ -1,25 +1,23 @@
 /// <reference path="../../../typings/react/react.d.ts"/>
 
-define(['react', 'helpers/css'], function (R, cssHelper) {
+define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelper, addItemForm) {
     return R.createClass({
-        handleClick: function (event) {
-            
+        getInitialState: function() {
+            return { 
+                formVisible: false
+            };
+        },
+        toggleForm: function (event) {
+            this.setState({ formVisible: !this.state.formVisible });
         },
         render: function () {
-            var addNewElement = R.DOM.div({ className: cssHelper.classConcat('circle', 'add') }, '+'),
-                nameElement = R.DOM.input({}),
-                heightElement = R.DOM.input({}),
-                countryElement = R.DOM.select({}),
-                dateElement = R.DOM.input({ type: 'date' }),
-                confirmButtonElement = R.DOM.button({ className: 'confirm' }, 'Confirm'),
-                cancelButtonElement = R.DOM.button({ className: 'cancel' }, 'Cancel'),
-                buttonHolderElement = R.DOM.div({ className: 'buttonHolder' }, [cancelButtonElement, confirmButtonElement]),
-                formElement = R.DOM.div({ className: 'newItemContainer' }, [nameElement, heightElement, countryElement, dateElement, buttonHolderElement]);
+            var addNewElement = R.DOM.div({ 
+                    className: cssHelper.classConcat('circle', 'add'),
+                    onClick: this.toggleForm 
+                }, '+'),
+                formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm });
             
-            return R.DOM.div({ 
-                className: 'record',
-                onClick: this.handleClick
-            }, [addNewElement, formElement]);
+            return R.DOM.div({ className: 'record' }, [addNewElement, formElement]);
         }
     });
 });

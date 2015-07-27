@@ -1,3 +1,7 @@
+body {
+	font: 11pt/24px normal Arial, Helvetica, sans-serif;
+}
+
 .timeline {
 	position: relative;
 	color: #333;
@@ -42,7 +46,7 @@
 	background: repeating-linear-gradient(-45deg, #71C6FF, #71C6FF 6px, #FFF 6px, #FFF 10px);
 }
 
-.label {
+.record .label {
 	position: absolute;
 	display: inline-block;
 	left: 260px;
@@ -52,7 +56,7 @@
 	font-weight: bold;
 }
 
-.date {
+.record .date {
 	position: absolute;
 	opacity: 0;
 	transition: opacity 0.5s;
@@ -80,35 +84,51 @@
 
 .newItemContainer {
 	position: relative;
+	transition: display 1s;
 	left: 120px;
 	margin-top: 16px;
 	width: 260px;
-	text-align: right;
+	text-align: left;
 	background: repeating-linear-gradient(-45deg, #F4F4F4, #F4F4F4 6px, #FFF 6px, #FFF 10px);
 	border: 2px solid #222;
-	padding: 6px 8px;
+	padding: 10px 8px;
 }
 
 .newItemContainer input, .newItemContainer select {
+	float: right;
 	border: 1px solid #444;
 	background: #FFF;
-	margin: 4px 8px;
 	padding: 4px;
 	width: 160px;
 }
 
+.newItemContainer .formLabel {
+	line-height: 30px;
+}
+
+.newItemContainer .formLine {
+	margin: 0 4px;
+	clear: both;
+}
+
 .buttonHolder {
+	width: 100%;
 	position: relative;
+	padding-top: 4px;
 	clear: both;
 	text-align: left;
 }
 
+.buttonHolder button {
+	padding: 4px 8px;
+}
+
 .buttonHolder .cancel {
 	position: relative;
-	left: 0;
+	right: 0;
 }
 
 .buttonHolder .confirm {
-	position: relative;
-	right: 0;
+	position: absolute;
+	right: 4px;
 }

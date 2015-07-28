@@ -1,39 +1,21 @@
-define(['react', 'data/countries'], function (R, countries) {
-    function createLabeledInput(label, inputOptions) {
-        var inputElement = R.DOM.input(inputOptions),
-            labelElement = R.DOM.span({ className: 'formLabel', key: label }, label);
-            
-        return R.DOM.div({ className: 'formLine' }, [labelElement, inputElement]);    
-    }
-    
-    function createSelectElement(elementOptions) {
-        var children = [];
-        
-        Object.keys(countries).forEach(function (code) {
-            children.push(R.DOM.option({ value: code, key: code }, countries[code]));
-        });
-        
-        return R.DOM.select(elementOptions, children);
-    }
-    
-    function createLabeledSelect(label, selectOptions) {
-        var selectElement = createSelectElement(selectOptions),
-            labelElement = R.DOM.span({ className: 'formLabel' }, label);
-            
-        return R.DOM.div({ className: 'formLine' }, [labelElement, selectElement]);
-    }
+define(['react', 'data/countries', 'helpers/validator', 'helpers/form'], function (R, countries, validator, formHelper) {
+
     
     return R.createClass({
-        closeForm: function() {
-            console.log('Canceling');
-            this.forceUpdate();
+        getInitialState: function() {
+            return { 
+                validName: true,
+                errorMessage: ''
+            };
+        },
+        closeForm: function () {
             this.props.toggleForm();
         },
         render: function () {
-			var	nameElement = createLabeledInput('Name'),
-                heightElement = createLabeledInput('Height'),
-                countryElement = createLabeledSelect('Country'),
-                dateElement = createLabeledInput('Date', { type: 'date' }),
+			var	nameElement = formHelper.createInput(this, 'form_name', 'Name', { isNotEmpty: 'Please enter mountain name!' }),
+                heightElement = formHelper.createInput(this, 'form_height', 'Height', { isNotEmpty: 'Please enter mountain height!', isNumber: 'Mountain height must be a number!' }),
+                countryElement = formHelper.createSelect(this, 'form_country', 'Country', countries),
+                dateElement = formHelper.createInput(this, 'form_date', 'Date', { type: 'date' }),
                 confirmButtonElement = R.DOM.button({ className: 'confirm' }, 'Confirm'),
                 cancelButtonElement = R.DOM.button({ 
                     className: 'cancel',

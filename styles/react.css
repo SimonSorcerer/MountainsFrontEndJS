@@ -102,6 +102,10 @@ body {
 	width: 160px;
 }
 
+.newItemContainer input.invalid, .newItemContainer select.invalid {
+	border: 1px solid red;
+}
+
 .newItemContainer .formLabel {
 	line-height: 30px;
 }

@@ -8,6 +8,7 @@ define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelp
             };
         },
         toggleForm: function (event) {
+            console.log(event);
             this.setState({ formVisible: !this.state.formVisible });
         },
         render: function () {

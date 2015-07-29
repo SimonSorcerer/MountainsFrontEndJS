@@ -2,7 +2,6 @@
 
 define(['react', 'helpers/css', 'components/timelineItem/date', 'components/timelineItem/label', 'components/timelineItem/circle'], 
     function (R, cssHelper, dateComponent, labelComponent, circleComponent) {        
-        
         return R.createClass({
             getInitialState: function() {
                 return { 

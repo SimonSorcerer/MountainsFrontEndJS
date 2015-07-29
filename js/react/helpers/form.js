@@ -6,6 +6,16 @@ define(['react', 'helpers/validator'], function (R, validator) {
         return R.DOM.div({ className: 'formLine' }, [labelElement, wrappedElement]);     
     }
     
+    function getClassNameFromState(state) {
+        var className = 'valid';
+        
+        if (typeof state !== 'undefined') {
+            className = state ? 'valid' : 'invalid';
+        }
+        
+        return className;
+    }
+    
     function validate(value, context, key, validatorInstructions) {
         var validationResult = validator.validate(validatorInstructions, value),
             validityKey = key + 'valid',
@@ -28,7 +38,9 @@ define(['react', 'helpers/validator'], function (R, validator) {
             validityKey = key + 'valid';
         
             inputElement = R.DOM.input({
-                className: context.state[validityKey] ? 'valid' : 'invalid',
+                className: getClassNameFromState(context.state[validityKey]),
+                type: 'text',
+                ref: key,
                 onChange: function (event) {
                     validate(event.target.value, context, key, validatorInstructions)
                 } 
@@ -50,12 +62,13 @@ define(['react', 'helpers/validator'], function (R, validator) {
     function createSelect(context, key, label, selectValues, validatorInstructions) {
         var selectElement,
             validityKey = key + 'valid';
-        
+            
             selectElement = R.DOM.select({
-                className: context.state[validityKey] ? 'valid' : 'invalid',
+                className: getClassNameFromState(context.state[validityKey]),
+                ref: key,
                 onChange: function (event) {
                     validate(event.target.value, context, key, validatorInstructions)
-                } 
+                }
             }, createSelectOptions(selectValues));
         
         return wrapFormElement(selectElement, key, label);    

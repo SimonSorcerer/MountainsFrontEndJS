@@ -24,7 +24,7 @@ define(function () {
 		var valid = true,
 			messages = [];
 		
-		Object.keys(instructions).forEach(function (key) {
+		Object.keys(instructions || {}).forEach(function (key) {
 			var validator = validators[key],
 				message = instructions[key],
 				partialValid;

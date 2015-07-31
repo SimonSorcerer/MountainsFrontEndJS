@@ -115,6 +115,12 @@ body {
 	clear: both;
 }
 
+.newItemContainer .formError {
+	color: red;
+	font-size: 10pt;
+	text-align: right;
+}
+
 .buttonHolder {
 	width: 100%;
 	position: relative;

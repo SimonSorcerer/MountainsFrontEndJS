@@ -14,11 +14,12 @@ define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelp
         render: function () {
             var addNewElement = R.DOM.div({ 
                     className: cssHelper.classConcat('circle', 'add'),
+                    key: 'addItemButton',
                     onClick: this.toggleForm 
                 }, '+'),
-                formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm });
+                formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm, key: 'newMountainForm' });
             
-            return R.DOM.div({ className: 'record' }, [addNewElement, formElement]);
+            return R.DOM.div({ className: 'record', key: 'addItem' }, [addNewElement, formElement]);
         }
     });
 });

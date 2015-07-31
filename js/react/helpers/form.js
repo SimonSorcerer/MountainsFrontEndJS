@@ -1,9 +1,10 @@
 define(['react', 'helpers/validator'], function (R, validator) {
 	
-    function wrapFormElement(wrappedElement, key, label) {
-        var labelElement = R.DOM.span({ className: 'formLabel', key: key }, label);
+    function wrapFormElement(wrappedElement, context, key, label) {
+        var labelElement = R.DOM.span({ className: 'formLabel', key: key + '_label' }, label),
+            errorMessageElement = createErrorMessageElement(context, key);
         
-        return R.DOM.div({ className: 'formLine' }, [labelElement, wrappedElement]);     
+        return R.DOM.div({ className: 'formLine', key: key + '_wrapper' }, [labelElement, wrappedElement, errorMessageElement]);     
     }
     
     function getClassNameFromState(state) {
@@ -18,35 +19,42 @@ define(['react', 'helpers/validator'], function (R, validator) {
     
     function validate(value, context, key, validatorInstructions) {
         var validationResult = validator.validate(validatorInstructions, value),
-            validityKey = key + 'valid',
-            errorMessageKey = key + 'error',
+            validityKey = key + '_valid',
+            errorMessageKey = key + '_error',
             newState = {};
                         
         if (!validationResult.valid) {
             newState[validityKey] = false;
-            newState[errorMessageKey] = validationResult.messages.join(', ');
-            context.setState(newState);
         } else {
             newState[validityKey] = true;
             newState[key] = value;
-            context.setState(newState);
         }
+        
+        newState[errorMessageKey] = validationResult.messages.join(' ');
+        context.setState(newState);
+    }
+    
+    function createErrorMessageElement(context, key) {
+        var errorMessageKey = key + '_error';
+        
+        return R.DOM.div({ className: 'formError', key: errorMessageKey }, context.state[errorMessageKey]);
     }
     
 	function createInput(context, key, label, validatorInstructions) {
         var inputElement,
-            validityKey = key + 'valid';
+            validityKey = key + '_valid';
         
             inputElement = R.DOM.input({
                 className: getClassNameFromState(context.state[validityKey]),
                 type: 'text',
                 ref: key,
+                key: key,
                 onChange: function (event) {
                     validate(event.target.value, context, key, validatorInstructions)
                 } 
             });
         
-        return wrapFormElement(inputElement, key, label);    
+        return wrapFormElement(inputElement, context, key, label);    
     }
     
     function createSelectOptions(values) {
@@ -61,17 +69,18 @@ define(['react', 'helpers/validator'], function (R, validator) {
     
     function createSelect(context, key, label, selectValues, validatorInstructions) {
         var selectElement,
-            validityKey = key + 'valid';
+            validityKey = key + '_valid';
             
             selectElement = R.DOM.select({
                 className: getClassNameFromState(context.state[validityKey]),
                 ref: key,
+                key: key,
                 onChange: function (event) {
                     validate(event.target.value, context, key, validatorInstructions)
                 }
             }, createSelectOptions(selectValues));
         
-        return wrapFormElement(selectElement, key, label);    
+        return wrapFormElement(selectElement, context, key, label);    
     }
 	
 	return {

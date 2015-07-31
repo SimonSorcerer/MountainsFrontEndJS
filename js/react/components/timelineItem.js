@@ -17,14 +17,17 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
             render: function () {
                 var recordAnchorElement = R.DOM.div({ className: 'anchor', key: 'anchor' }),
                     labelElement = R.createElement(labelComponent, {
+                        key: 'label',
                         name: this.props.name,
                         height: this.props.height
                     }),
                     dateElement = R.createElement(dateComponent, {
+                        key: 'date',
                         visible: this.state.detailsVisible,
                         value: this.props.date
                     }),
                     mountainCircleElement = R.createElement(circleComponent, {
+                        key: 'circle',
                         height: this.props.height,
                         highlighted: this.state.detailsVisible
                     }),

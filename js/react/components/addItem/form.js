@@ -10,14 +10,13 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
         },
         submitForm: function () {
             var newMountain = {
-                name: this.state.form_name,
-                height: this.state.form_height,
-                country: this.state.form_country,
-                date: this.state.form_date
-            };
+                    name: this.state.form_name,
+                    height: this.state.form_height,
+                    country: this.state.form_country,
+                    date: this.state.form_date
+                };
             
             if (this.isFormValid()) {
-                console.log(this.state);
                 console.log(newMountain);
                 
                 /*
@@ -39,19 +38,17 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
         componentDidMount: function () {
             var dateInputDOMElement = R.findDOMNode(this.refs.form_date),
                 picker,
-                state = this.state,
+                context = this,
                 options = {
                     field: dateInputDOMElement,
                     firstDay: 1,
                     onSelect: function (value) {
-                        state.form_date = value.toJSON();
-                        console.log(state.form_date);
+                        context.setState({form_date: value.toJSON()});
                     }
                 };
             
             if (dateInputDOMElement) {
                 picker = new Pikaday(options);
-                
                 picker.gotoToday();
             }
         },

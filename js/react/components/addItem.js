@@ -8,7 +8,6 @@ define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelp
             };
         },
         toggleForm: function (event) {
-            console.log(event);
             this.setState({ formVisible: !this.state.formVisible });
         },
         render: function () {
@@ -19,7 +18,7 @@ define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelp
                 }, '+'),
                 formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm, key: 'newMountainForm' });
             
-            return R.DOM.div({ className: 'record', key: 'addItem' }, [addNewElement, formElement]);
+            return R.DOM.div({ className: 'record unselectable', key: 'addItem' }, [addNewElement, formElement]);
         }
     });
 });

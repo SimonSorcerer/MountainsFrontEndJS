@@ -41,20 +41,21 @@ define(['react', 'helpers/validator'], function (R, validator) {
     }
     
 	function createInput(context, key, label, validatorInstructions) {
-        var inputElement,
-            validityKey = key + '_valid';
-        
-            inputElement = R.DOM.input({
+        var validityKey = key + '_valid',
+            inputSettings = {
                 className: getClassNameFromState(context.state[validityKey]),
                 type: 'text',
                 ref: key,
-                key: key,
-                onChange: function (event) {
-                    validate(event.target.value, context, key, validatorInstructions)
-                } 
-            });
+                key: key
+            };
+            
+        if (validatorInstructions) {
+            inputSettings.onChange = function (event) {
+                validate(event.target.value, context, key, validatorInstructions)
+            }
+        }
         
-        return wrapFormElement(inputElement, context, key, label);    
+        return wrapFormElement(R.DOM.input(inputSettings), context, key, label);    
     }
     
     function createSelectOptions(values) {

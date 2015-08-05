@@ -13,10 +13,12 @@ define(['react', 'repositories/mountainRepository'], function (R, mountainReposi
 					opacity: this.props.visible ? 1 : 0
 				}
 				
-			return R.DOM.div({ 
+			return R.DOM.div({
 				className: 'remove', 
 				style: style, key: 'remove',
-				onClick: this.removeItem 
+				alt: 'remove item',
+				title: 'remove item',
+				onClick: this.removeItem
 			}, 'x');
 		}
 	});

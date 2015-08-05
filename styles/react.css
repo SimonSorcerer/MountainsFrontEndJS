@@ -84,7 +84,8 @@ body {
 	height: 20px;
 	left: 200px;
 	top: calc(50% - 14px);
-	background-color: #FA987D;
+	background-color: #F5F5F5;
+	color: #333;
 	border-radius: 50%;
 	border: 2px solid #222;
 	cursor: pointer;
@@ -96,9 +97,9 @@ body {
 
 .remove:hover {
 	background-color: #FA3802;
-	color: #FFF;
-	transition: color 0.5s;
-	transition: background-color 0.5s;
+	color: #FFF;	
+	transition: color 0.3s;
+	transition: background-color 0.3s;
 }
 
 .circle.add:hover {

@@ -78,6 +78,29 @@ body {
 	cursor: pointer;
 }
 
+.remove {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	left: 200px;
+	top: calc(50% - 14px);
+	background-color: #FA987D;
+	border-radius: 50%;
+	border: 2px solid #222;
+	cursor: pointer;
+	z-index: 4;
+	font: 12pt/20px normal Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+}
+
+.remove:hover {
+	background-color: #FA3802;
+	color: #FFF;
+	transition: color 0.5s;
+	transition: background-color 0.5s;
+}
+
 .circle.add:hover {
 	background: repeating-linear-gradient(-45deg, #BFCBA6, #BFCBA6 6px, #FFF 6px, #FFF 10px);
 }

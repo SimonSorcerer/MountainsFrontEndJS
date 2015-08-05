@@ -1,7 +1,7 @@
 /// <reference path="../../../typings/react/react.d.ts"/>
 
-define(['react', 'helpers/css', 'components/timelineItem/date', 'components/timelineItem/label', 'components/timelineItem/circle'], 
-    function (R, cssHelper, dateComponent, labelComponent, circleComponent) {        
+define(['react', 'helpers/css', 'components/timelineItem/date', 'components/timelineItem/label', 'components/timelineItem/circle', 'components/timelineItem/remove'], 
+    function (R, cssHelper, dateComponent, labelComponent, circleComponent, removeComponent) {
         return R.createClass({
             getInitialState: function() {
                 return { 
@@ -31,6 +31,10 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
                         height: this.props.height,
                         highlighted: this.state.detailsVisible
                     }),
+                    removeElement = R.createElement(removeComponent, {
+                        visible: this.state.detailsVisible,
+                        id: this.props.id
+                    }),
                     domParams = {
                         className: cssHelper.classConcat('record', 'mountain'), 
                         key: 'record', 
@@ -38,7 +42,7 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
                         onMouseLeave: this.handleMouseLeave 
                     };
                     
-                return R.DOM.div(domParams, [ recordAnchorElement, dateElement, mountainCircleElement, labelElement ]);
+                return R.DOM.div(domParams, [ recordAnchorElement, dateElement, mountainCircleElement, labelElement, removeElement ]);
             }
         });
 });

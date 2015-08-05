@@ -8,6 +8,9 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
         closeForm: function () {
             this.props.toggleForm();
         },
+        clearForm: function () {
+            // not implemented yet
+        },
         submitForm: function () {
             var newMountain = {
                     name: this.state.form_name,
@@ -19,11 +22,9 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
             if (this.isFormValid()) {
                 console.log(newMountain);
                 
-                /*
                 mountainRepository.insert(newMountain, function (result) {
                     console.log("Mountain added: " + result.toString());
                 });
-                */
             }
         },
         isFormValid: function () {

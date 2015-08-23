@@ -32,9 +32,29 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
                 state = this.state;
             
             return formKeys.every(function (key) {
-                var validKey = key + '_valid';
-                return state[validKey] !== false;
+                var validityKey = key + '_valid';
+                return state[validityKey] !== false;
             });
+        },
+        resetForm: function () {
+             var formKeys = ['form_name', 'form_height', 'form_country', 'form_date'],
+                newState = {};
+                
+            formKeys.forEach(function (key) {
+                var validityKey = key + '_valid',
+                    errorMessageKey = key + '_error';
+                
+                newState[validityKey] = true;
+                newState[key] = '';
+                newState[errorMessageKey] = '';
+            });
+            
+            this.setState(newState);
+        },
+        componentWillReceiveProps: function (nextProps) {
+           if (!nextProps.visible) {
+               this.resetForm();
+           }
         },
         componentDidMount: function () {
             var dateInputDOMElement = R.findDOMNode(this.refs.form_date),
@@ -54,10 +74,33 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
             }
         },
         render: function () {
-			var	nameElement = formHelper.createInput(this, 'form_name', 'Name', { isNotEmpty: 'Please enter mountain name!' }),
-                heightElement = formHelper.createInput(this, 'form_height', 'Height', { isNotEmpty: 'Please enter mountain height!', isNumber: 'Mountain height must be a number!' }),
-                countryElement = formHelper.createSelect(this, 'form_country', 'Country', countries),
-                dateElement = formHelper.createInput(this, 'form_date', 'Date'),
+			var	nameElement = formHelper.createInput({
+                    context: this, 
+                    key: 'form_name', 
+                    label: 'Name',
+                    reset: !this.props.visible,
+                    validatorInstructions: { isNotEmpty: 'Please enter mountain name!' }
+                }),
+                heightElement = formHelper.createInput({
+                    context: this, 
+                    key: 'form_height', 
+                    label: 'Height', 
+                    reset: !this.props.visible,
+                    validatorInstructions: { isNotEmpty: 'Please enter mountain height!', isNumber: 'Mountain height must be a number!' }
+                }),
+                countryElement = formHelper.createSelect({
+                    context: this, 
+                    key: 'form_country', 
+                    label: 'Country', 
+                    reset: !this.props.visible,
+                    selectValues: countries
+                }),
+                dateElement = formHelper.createInput({
+                    context: this, 
+                    key: 'form_date', 
+                    label: 'Date',
+                    reset: !this.props.visible
+                }),
                 confirmButtonElement = R.DOM.button({
                     key: 'confirmButton', 
                     className: 'confirm',

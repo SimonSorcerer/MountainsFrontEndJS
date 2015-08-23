@@ -1,10 +1,10 @@
 define(['react', 'helpers/validator'], function (R, validator) {
 	
-    function wrapFormElement(wrappedElement, context, key, label) {
-        var labelElement = R.DOM.span({ className: 'formLabel', key: key + '_label' }, label),
-            errorMessageElement = createErrorMessageElement(context, key);
+    function wrapFormElement(options) {
+        var labelElement = R.DOM.span({ className: 'formLabel', key: options.key + '_label' }, options.label),
+            errorMessageElement = createErrorMessageElement(options.context, options.key);
         
-        return R.DOM.div({ className: 'formLine', key: key + '_wrapper' }, [labelElement, wrappedElement, errorMessageElement]);     
+        return R.DOM.div({ className: 'formLine', key: options.key + '_wrapper' }, [labelElement, options.element, errorMessageElement]);     
     }
     
     function getClassNameFromState(state) {
@@ -17,21 +17,21 @@ define(['react', 'helpers/validator'], function (R, validator) {
         return className;
     }
     
-    function validate(value, context, key, validatorInstructions) {
-        var validationResult = validator.validate(validatorInstructions, value),
-            validityKey = key + '_valid',
-            errorMessageKey = key + '_error',
+    function validate(options) {
+        var validationResult = validator.validate(options.validatorInstructions, options.value),
+            validityKey = options.key + '_valid',
+            errorMessageKey = options.key + '_error',
             newState = {};
-                        
+            
         if (!validationResult.valid) {
             newState[validityKey] = false;
         } else {
             newState[validityKey] = true;
-            newState[key] = value;
+            newState[options.key] = options.value;
         }
         
         newState[errorMessageKey] = validationResult.messages.join(' ');
-        context.setState(newState);
+        options.context.setState(newState);
     }
     
     function createErrorMessageElement(context, key) {
@@ -40,48 +40,79 @@ define(['react', 'helpers/validator'], function (R, validator) {
         return R.DOM.div({ className: 'formError', key: errorMessageKey }, context.state[errorMessageKey]);
     }
     
-	function createInput(context, key, label, validatorInstructions) {
-        var validityKey = key + '_valid',
+	function createInput(options) {
+        var validityKey = options.key + '_valid',
             inputSettings = {
-                className: getClassNameFromState(context.state[validityKey]),
+                className: getClassNameFromState(options.context.state[validityKey]),
                 type: 'text',
-                ref: key,
-                key: key
+                ref: options.key,
+                key: options.key
             };
             
-        if (validatorInstructions) {
+        if (options.reset) {
+            inputSettings.value = '';
+        }
+            
+        if (options.validatorInstructions) {
             inputSettings.onChange = function (event) {
-                validate(event.target.value, context, key, validatorInstructions)
+                validate({
+                    value: event.target.value,
+                    context: options.context, 
+                    key: options.key, 
+                    validatorInstructions: options.validatorInstructions
+                });
             }
         }
         
-        return wrapFormElement(R.DOM.input(inputSettings), context, key, label);    
+        return wrapFormElement({
+            element: R.DOM.input(inputSettings), 
+            context: options.context, 
+            key: options.key, 
+            label: options.label
+        });    
     }
     
-    function createSelectOptions(values) {
+    function createSelectOptions(values, reset) {
         var children = [];
         
         Object.keys(values).forEach(function (key) {
-            children.push(R.DOM.option({ value: key, key: key }, values[key]));
+            if (reset && children.length === 0) {
+                children.push(R.DOM.option({ value: key, key: key, selected: true }, values[key]));
+            } else {
+                children.push(R.DOM.option({ value: key, key: key }, values[key]));
+            }
         });
         
         return children;
     }
     
-    function createSelect(context, key, label, selectValues, validatorInstructions) {
-        var selectElement,
-            validityKey = key + '_valid';
+    function createSelect(options) {
+        var selectSettings,
+            validityKey = options.key + '_valid';
             
-            selectElement = R.DOM.select({
-                className: getClassNameFromState(context.state[validityKey]),
-                ref: key,
-                key: key,
-                onChange: function (event) {
-                    validate(event.target.value, context, key, validatorInstructions)
-                }
-            }, createSelectOptions(selectValues));
+        selectSettings = {
+            className: getClassNameFromState(options.context.state[validityKey]),
+            ref: options.key,
+            key: options.key
+        };
         
-        return wrapFormElement(selectElement, context, key, label);    
+        if (options.validatorInstructions) {
+            selectSettings.onChange = function (event) {
+                validate({
+                    value: event.target.value, 
+                    context: options.context, 
+                    key: options.key, 
+                    validatorInstructions: options.validatorInstructions
+                });
+            }
+        }
+            
+        return wrapFormElement({
+            element: R.DOM.select(selectSettings, createSelectOptions(options.selectValues, options.reset)), 
+            context: options.context, 
+            key: options.key, 
+            label: options.label
+        });    
     }
 	
 	return {

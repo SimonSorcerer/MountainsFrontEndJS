@@ -16,7 +16,7 @@ define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelp
                     key: 'addItemButton',
                     onClick: this.toggleForm 
                 }, '+'),
-                formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm, key: 'newMountainForm' });
+                formElement = R.createElement(addItemForm, { visible: this.state.formVisible, toggleForm: this.toggleForm, updateData: this.props.updateData, key: 'newMountainForm' });
             
             return R.DOM.div({ className: 'record unselectable', key: 'addItem' }, [addNewElement, formElement]);
         }

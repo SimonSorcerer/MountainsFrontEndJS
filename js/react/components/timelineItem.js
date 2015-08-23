@@ -34,6 +34,7 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
                     removeElement = R.createElement(removeComponent, {
                         key: 'remove',
                         visible: this.state.detailsVisible,
+                        updateData: this.props.updateData,
                         id: this.props.id
                     }),
                     domParams = {

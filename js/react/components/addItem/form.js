@@ -12,7 +12,8 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
             // not implemented yet
         },
         submitForm: function () {
-            var newMountain = {
+            var self = this,
+                newMountain = {
                     name: this.state.form_name,
                     height: this.state.form_height,
                     country: this.state.form_country,
@@ -23,6 +24,8 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
                 console.log(newMountain);
                 
                 mountainRepository.insert(newMountain, function (result) {
+                    self.closeForm();
+                    self.props.updateData();
                     console.log("Mountain added: " + result.toString());
                 });
             }

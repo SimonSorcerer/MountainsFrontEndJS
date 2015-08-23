@@ -8,7 +8,7 @@ define(['services/azureClient'], function (azureClient) {
     }
 
     function getAll(callback) {
-        table.where("").read().then(function (mountains) {
+        table.where("").orderByDescending("date").read().then(function (mountains) {
             callback(mountains);
         });
     }

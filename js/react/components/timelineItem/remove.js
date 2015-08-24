@@ -1,11 +1,12 @@
 define(['react', 'repositories/mountainRepository'], function (R, mountainRepository) {
     return R.createClass({
 		removeItem: function () {
-			var id = this.props.id;
+			var self = this, 
+				id = self.props.id;
 			
 			if (id) {
 				mountainRepository.remove({ id: this.props.id }, function () {
-					this.props.updateData();
+					self.props.updateData();
 					console.log("Mountain (id: " + id + ") was removed");
 				});
 			}

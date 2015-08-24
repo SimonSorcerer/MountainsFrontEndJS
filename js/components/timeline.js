@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/react/react.d.ts"/>
-
 define(['react', 'components/addItem', 'components/timelineItem', 'repositories/mountainRepository'], function (R, addItemComponent, timelineItemComponent, mountainRepository) {
     return R.createClass({
         updateData: function () {

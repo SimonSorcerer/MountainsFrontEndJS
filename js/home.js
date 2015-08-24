@@ -1,5 +1,3 @@
-/// <reference path="../../typings/react/react.d.ts"/>
-
 define(['react', 'components/timeline', 'services/authManager', 'repositories/mountainRepository'], function (R, timelineComponent, authManager, mountainRepository) {
     var root = document.body;
 

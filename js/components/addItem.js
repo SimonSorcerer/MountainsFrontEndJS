@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/react/react.d.ts"/>
-
 define(['react', 'helpers/css', 'components/addItem/form'], function (R, cssHelper, addItemForm) {
     return R.createClass({
         getInitialState: function() {

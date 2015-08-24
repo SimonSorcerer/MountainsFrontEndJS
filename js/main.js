@@ -1,25 +1,15 @@
-var app = angular.module('mountains', []).
-    config(function($routeProvider) {
-        $routeProvider.
-            when('/', {controller: HomeController, templateUrl: 'home.html', data: {
-                authRequired: true
-            }}).
-            when('/stats', {controller: StatsController, templateUrl: 'stats.html'}).
-            when('/login', {controller: LoginController, templateUrl: 'login.html'}).
-            otherwise({redirectTo: '/'});
-    });
+/* global requirejs */
 
-app.run(function ($rootScope, EVENTS, AuthManager) {
-    $rootScope.$on('$locationChangeStart', function (event, nextUrl) {
-        var authRequired = false;
-
-        if (nextUrl.data) {
-            authRequired = nextUrl.data.authRequired;
-        }
-
-        if (!AuthManager.isAuthenticated() && authRequired) {
-            $rootScope.$broadcast(EVENTS.auth.notAuthenticated);
-            event.preventDefault();
-        }
-    });
+requirejs.config({
+    baseUrl: 'js',
+    paths: {
+        'react': ['https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react', 'vendor/react.min'],
+        'WindowsAzure': ['http://ajax.aspnetcdn.com/ajax/mobileservices/MobileServices.Web-1.2.5', 'vendor/mobileServices.min']
+    }
 });
+
+requirejs(['home']);
+
+define('MobileServiceClient', ['WindowsAzure'], function () {
+    return WindowsAzure.MobileServiceClient;
+})

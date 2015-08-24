@@ -1,5 +1,3 @@
-/// <reference path="../../../typings/react/react.d.ts"/>
-
 define(['react', 'helpers/css', 
     'components/timelineItem/date', 'components/timelineItem/label', 
     'components/timelineItem/circle', 'components/timelineItem/remove', 

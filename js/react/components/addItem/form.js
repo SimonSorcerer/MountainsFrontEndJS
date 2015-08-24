@@ -8,9 +8,6 @@ define(['react', 'data/countries', 'helpers/validator', 'helpers/form', 'reposit
         closeForm: function () {
             this.props.toggleForm();
         },
-        clearForm: function () {
-            // not implemented yet
-        },
         submitForm: function () {
             var self = this,
                 newMountain = {

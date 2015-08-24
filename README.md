@@ -4,5 +4,5 @@ App displays a timeline with mountains (supposedly ascended by the user) and use
 App uses Azure mobile services for storing data and authentication (using Facebook oAuth).
 
 Some pictures:
-![Game Screenshot :)](/../screenshots/screenshots/mountains1.png?raw=true "Hovering over timeline item")
-![Game Screenshot :)](/../screenshots/screenshots/mountains2.png?raw=true "Adding new mountain")
+![Hovering over timeline item](/../screenshots/screenshots/mountains1.png?raw=true "Hovering over timeline item")
+![Adding new mountain](/../screenshots/screenshots/mountains2.png?raw=true "Adding new mountain")

@@ -18,10 +18,16 @@ define(['react', 'helpers/validator'], function (R, validator) {
     }
     
     function validate(options) {
-        var validationResult = validator.validate(options.validatorInstructions, options.value),
+        var validationResult,
             validityKey = options.key + '_valid',
             errorMessageKey = options.key + '_error',
             newState = {};
+            
+        if (!options.validatorInstructions) {
+            return updateValueState(options);
+        }
+            
+        validationResult = validator.validate(options.validatorInstructions, options.value);
             
         if (!validationResult.valid) {
             newState[validityKey] = false;
@@ -40,6 +46,13 @@ define(['react', 'helpers/validator'], function (R, validator) {
         return R.DOM.div({ className: 'formError', key: errorMessageKey }, context.state[errorMessageKey]);
     }
     
+    function updateValueState(options) {
+        var newState = {};
+        
+        newState[options.key] = options.value;
+        options.context.setState(newState);
+    }
+    
 	function createInput(options) {
         var validityKey = options.key + '_valid',
             inputSettings = {
@@ -53,15 +66,13 @@ define(['react', 'helpers/validator'], function (R, validator) {
             inputSettings.value = '';
         }
             
-        if (options.validatorInstructions) {
-            inputSettings.onChange = function (event) {
-                validate({
-                    value: event.target.value,
-                    context: options.context, 
-                    key: options.key, 
-                    validatorInstructions: options.validatorInstructions
-                });
-            }
+        inputSettings.onChange = function (event) {
+            validate({
+                value: event.target.value,
+                context: options.context, 
+                key: options.key, 
+                validatorInstructions: options.validatorInstructions
+            });
         }
         
         return wrapFormElement({
@@ -96,16 +107,15 @@ define(['react', 'helpers/validator'], function (R, validator) {
             key: options.key
         };
         
-        if (options.validatorInstructions) {
-            selectSettings.onChange = function (event) {
-                validate({
-                    value: event.target.value, 
-                    context: options.context, 
-                    key: options.key, 
-                    validatorInstructions: options.validatorInstructions
-                });
-            }
+        selectSettings.onChange = function (event) {
+            validate({
+                value: event.target.value, 
+                context: options.context, 
+                key: options.key, 
+                validatorInstructions: options.validatorInstructions
+            });
         }
+
             
         return wrapFormElement({
             element: R.DOM.select(selectSettings, createSelectOptions(options.selectValues, options.reset)), 

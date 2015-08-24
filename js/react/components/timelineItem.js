@@ -1,7 +1,10 @@
 /// <reference path="../../../typings/react/react.d.ts"/>
 
-define(['react', 'helpers/css', 'components/timelineItem/date', 'components/timelineItem/label', 'components/timelineItem/circle', 'components/timelineItem/remove'], 
-    function (R, cssHelper, dateComponent, labelComponent, circleComponent, removeComponent) {
+define(['react', 'helpers/css', 
+    'components/timelineItem/date', 'components/timelineItem/label', 
+    'components/timelineItem/circle', 'components/timelineItem/remove', 
+    'components/timelineItem/country'], 
+    function (R, cssHelper, dateComponent, labelComponent, circleComponent, removeComponent, countryComponent) {
         return R.createClass({
             getInitialState: function() {
                 return { 
@@ -37,6 +40,11 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
                         updateData: this.props.updateData,
                         id: this.props.id
                     }),
+                    countryElement = R.createElement(countryComponent, {
+                        key: 'country',
+                        visible: this.state.detailsVisible,
+                        value: this.props.country
+                    }),
                     domParams = {
                         className: cssHelper.classConcat('record', 'mountain'), 
                         key: 'record', 
@@ -44,7 +52,7 @@ define(['react', 'helpers/css', 'components/timelineItem/date', 'components/time
                         onMouseLeave: this.handleMouseLeave 
                     };
                     
-                return R.DOM.div(domParams, [ recordAnchorElement, dateElement, mountainCircleElement, labelElement, removeElement ]);
+                return R.DOM.div(domParams, [ recordAnchorElement, dateElement, mountainCircleElement, labelElement, removeElement, countryElement ]);
             }
         });
 });

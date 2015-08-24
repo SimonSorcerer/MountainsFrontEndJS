@@ -68,6 +68,17 @@ body {
 	color: #888;
 }
 
+.record .country {
+	position: absolute;
+	opacity: 0;
+	transition: opacity 0.5s;
+	left: 260px;
+	top: calc(50% + 6px);
+	font: 8pt/24px normal Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	color: #888;
+}
+
 .add {
 	width: 40px;
 	height: 40px;

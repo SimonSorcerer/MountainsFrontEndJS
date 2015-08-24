@@ -4,9 +4,10 @@ define(['react', 'repositories/mountainRepository'], function (R, mountainReposi
 			var id = this.props.id;
 			
 			if (id) {
-				mountainRepository.remove({ id: this.props.id });
-				this.props.updateData();
-				console.log("Mountain (id: " + id + ") was removed");
+				mountainRepository.remove({ id: this.props.id }, function () {
+					this.props.updateData();
+					console.log("Mountain (id: " + id + ") was removed");
+				});
 			}
 		},
         render: function () {
